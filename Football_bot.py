@@ -48,7 +48,7 @@ class TelegramRSSBot:
                 self.config = {
                     "telegram_channel": "https://t.me/s/euro_football_ru",
                     "bot_token": "YOUR_BOT_TOKEN_HERE",
-                    "target_chat_id": "-1002989870351",
+                    "target_chat_id": "YOUR_CHAT_ID_HERE",
                     "check_interval_minutes": 30,
                     "schedule_times": ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"]
                 }
@@ -284,19 +284,9 @@ def main():
 
     bot = TelegramRSSBot()
 
-    print("Режимы работы:")
-    print("1 - Однократный запуск")
-    print("2 - По расписанию (каждые 2 часа 9:00-21:00)")
-
-    choice = input("Выберите режим (1/2): ").strip()
-
-    if choice == "1":
-        bot.run_once()
-    elif choice == "2":
-        bot.run_scheduled()
-    else:
-        print("❌ Неверный выбор. Запускаю однократный режим...")
-        bot.run_once()
+    # АВТОМАТИЧЕСКИ ВЫБИРАЕМ РЕЖИМ 2 (ПО РАСПИСАНИЮ)
+    print("🟢 Автоматический запуск по расписанию")
+    bot.run_scheduled()
 
 
 if __name__ == "__main__":
