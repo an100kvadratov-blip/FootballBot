@@ -47,7 +47,7 @@ class TelegramRSSBot:
                 # Конфиг по умолчанию
                 self.config = {
                     "telegram_channel": "https://t.me/s/euro_football_ru",
-                    "bot_token": "8459047160:AAHr8jJ6UvAvQuD1zl16WgmoQ5ygtkyI8iI",
+                    "bot_token": "YOUR_BOT_TOKEN_HERE",
                     "target_chat_id": "-1002989870351",
                     "check_interval_minutes": 30,
                     "schedule_times": ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"]
