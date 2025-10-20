@@ -41,7 +41,6 @@ class TelegramRSSBot:
                     "telegram_channel": "https://t.me/s/euro_football_ru",
                     "bot_token": bot_token,
                     "target_chat_id": chat_id,
-                    "check_interval_minutes": 30,
                     "schedule_times": ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"]
                 }
                 logger.info("✅ Конфигурация загружена из переменных окружения")
@@ -54,7 +53,6 @@ class TelegramRSSBot:
                     "telegram_channel": "https://t.me/s/euro_football_ru",
                     "bot_token": "YOUR_BOT_TOKEN_HERE",
                     "target_chat_id": "YOUR_CHAT_ID_HERE",
-                    "check_interval_minutes": 30,
                     "schedule_times": ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"]
                 }
                 logger.info("⚠️ Создан конфиг по умолчанию")
@@ -215,18 +213,15 @@ class TelegramRSSBot:
             logger.error(f"❌ Ошибка обработки: {e}")
 
     def setup_schedule(self):
+        # ТОЛЬКО по расписанию (без интервальной проверки)
         for time_str in self.config['schedule_times']:
             schedule.every().day.at(time_str).do(self.process_news)
             logger.info(f"⏰ Настроено время: {time_str}")
 
-        interval = self.config.get('check_interval_minutes', 30)
-        schedule.every(interval).minutes.do(self.process_news)
-        logger.info(f"⏰ Интервальная проверка: каждые {interval} минут")
-
     def run_scheduled(self):
         logger.info("🟢 Запуск по расписанию")
         self.setup_schedule()
-        self.process_news()
+        self.process_news()  # Первая проверка при запуске
 
         logger.info("⏰ Бот запущен. Ожидание расписания...")
         while True:
